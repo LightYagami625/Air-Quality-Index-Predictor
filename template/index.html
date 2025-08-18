@@ -42,13 +42,13 @@
         <div class="nav-container">
             <div class="logo">AQI Predictor</div>
             <ul class="nav-links">
-                <li><a href="#" onclick="showHome()">Home</a></li>
+                <li><a href="index.html" onclick="showHome()">Home</a></li>
                 <li class="dropdown">
                     <!-- <input type="text"> -->
                     <a href="#" class="dropbtn">Predict</a>
                     <div class="dropdown-content">
-                        <a href="#" onclick="showPredict('basic')">Basic</a>
-                        <a href="pridict-sci.html">Advance</a>
+                        <a href="basic.html" ">Basic</a>
+                        <a href="advance.html">Advance</a>
                     </div>
                 </li>
             </ul>
@@ -154,6 +154,17 @@
     </footer>
 
     <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const resultMessage = document.getElementById('result-message');
+            if (resultMessage) {
+                resultMessage.style.display = 'block';
+                resultMessage.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+
+    <!-- <script>
         function showHome() {
             document.getElementById('home-page').style.display = 'block';
             document.getElementById('predict-page').style.display = 'none';
@@ -170,6 +181,7 @@
             document.getElementById('result-message').style.display = 'block';
             document.getElementById('result-message').scrollIntoView({ behavior: 'smooth' });
         }
-    </script>
+    </script> -->
 </body>
+
 </html>
