@@ -301,6 +301,9 @@
             outline: none;
             border-color: #667eea;
         }
+        .station{
+            width: 76vh;
+        }
 
         .submit-btn {
             width: 100%;
