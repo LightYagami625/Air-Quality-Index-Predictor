@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Advanced AQI Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <nav>
         <div class="nav-container">
             <div class="logo">AQI Predictor</div>
             <ul class="nav-links">
-                <li><a href="index.html" onclick="showHome()">Home</a></li>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
                 <li class="dropdown">
-                    <!-- <input type="text"> -->
                     <a href="#" class="dropbtn">AQI</a>
                     <div class="dropdown-content">
-                        <a href="basic.html" ">Basic</a>
-                        <a href="advance.html">Advance</a>
+                        <a href="{{ url_for('advance') }}">Advanced Prediction</a>
                     </div>
                 </li>
             </ul>
@@ -25,10 +23,13 @@
     </nav>
    <div id="predict-page" class="predict-page">
         <div class="container">
-            <form class="predict-form" onsubmit="handleSubmit(event)">
+            <form class="predict-form" method="POST">
                 <h2>Air Quality Prediction</h2>
                 <p style="text-align: center; margin-bottom: 2rem; color: #666;">Enter the pollutant values to predict the Air Quality Index</p>
-                 <div class="form-group">
+                {% if error %}
+                    <div class="error-message">{{ error }}</div>
+                {% endif %}
+                <div class="form-group">
                         <label for="std-id">Station ID</label>
                         <input type="number" id="std-id" name="std-id" class="station" required>
                     </div>
@@ -75,23 +76,25 @@
                 <button type="submit" class="submit-btn">Predict Air Quality Index</button>
                 
                 <div id="result-message" class="result-message">
-                    <h3>Prediction Result</h3>
-                    <p>Based on the provided values, the predicted Air Quality Index is <strong>78</strong> (Moderate). 
-                    This indicates that air quality is acceptable for most people, but sensitive individuals may experience minor issues.</p>
+                    {% if error %}
+                        <h3>Error</h3>
+                        <p>{{ error }}</p>
+                    {% elif result %}
+                        <h3>Prediction Result</h3>
+                        <p>Based on the provided values, the predicted Air Quality Index is <strong>{{ result }}</strong></p>
+                    {% endif %}
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        function handleSubmit(event) {
-            event.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
             const resultMessage = document.getElementById('result-message');
             if (resultMessage) {
-                resultMessage.style.display = 'block';
                 resultMessage.scrollIntoView({ behavior: 'smooth' });
             }
-        }
+        });
     </script>
     
 </body>
