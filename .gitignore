@@ -1,0 +1,5 @@
+venv/
+Air-Pollution.csv
+air.csv
+Dataset-for-test.csv
+AQI.joblib
