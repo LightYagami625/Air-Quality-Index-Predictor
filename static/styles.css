@@ -97,7 +97,7 @@
             /* Background image with semi-transparent overlay for readability.
                Assumption: place your image at static/images/hero.jpg (Flask serves files from /static).
                If you keep the image elsewhere, update the URL below accordingly. */
-            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('air.avif');
+            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('cover.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -111,14 +111,18 @@
             font-family: Verdana;
             font-size: 8rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;  /* Increased spacing between h1 and p */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            /* display: block;  Ensure block-level display */
         }
 
         .hero p {
             font-size: 1.2rem;
+            margin-top: -2.2rem;     /* Add space above the paragraph */
             margin-bottom: 2rem;
+            margin-left: 0.5rem;
             opacity: 0.9;
+            display: block;       
         }
 
         /* .hero-image {

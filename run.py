@@ -12,7 +12,7 @@ def load_aqi_model(model_filename='AQI.joblib'):
     """Load the trained AQI model"""
     try:
         if not os.path.exists(model_filename):
-            print(f"❌ Model file '{model_filename}' not found!")
+            print(f" Model file '{model_filename}' not found!")
             print("Available .joblib files:")
             joblib_files = [f for f in os.listdir('.') if f.endswith('.joblib')]
             for file in joblib_files:
@@ -22,8 +22,8 @@ def load_aqi_model(model_filename='AQI.joblib'):
         model_data = joblib.load(model_filename)
         model_pipeline = model_data['model_pipeline']
         
-        print(f"✅ Model loaded successfully!")
-        print(f"📊 Model Info:")
+        print(f" Model loaded successfully!")
+        print(f" Model Info:")
         print(f"  Algorithm: {model_data['training_info']['algorithm']}")
         print(f"  Test R²: {model_data['performance_metrics']['test_r2']:.4f}")
         print(f"  Test MAE: {model_data['performance_metrics']['test_mae']:.4f}")
@@ -32,7 +32,7 @@ def load_aqi_model(model_filename='AQI.joblib'):
         return model_data, model_pipeline
         
     except Exception as e:
-        print(f"❌ Error loading model: {e}")
+        print(f" Error loading model: {e}")
         return None
 
 # =============================================
