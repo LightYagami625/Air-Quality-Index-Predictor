@@ -12,6 +12,7 @@
             <div class="logo">AQI Predictor</div>
             <ul class="nav-links">
                 <li><a href="{{ url_for('index') }}">Home</a></li>
+                <!-- <li><a href="{{ url_for('info')}}" >Info</a></li> -->
                 <li class="dropdown">
                     <a href="#" class="dropbtn">AQI</a>
                     <div class="dropdown-content">
@@ -19,6 +20,7 @@
                         <a href="{{ url_for('advance') }}">Advanced</a>
                     </div>
                 </li>
+                <li><a href="{{ url_for('info')}}" >Info</a></li>
             </ul>
         </div>
     </nav>
@@ -239,6 +241,13 @@
             </div> -->
         </div>
     </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Air Quality Index Predictor. All rights reserved.</p>
+            <p>Stay informed, breathe better.</p>
+        </div>
+    </footer>
 
     <script>
         // Scenario data matching the backend

@@ -2,33 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta na            {% if error or prediction %}
-            <div id="result-message" class="result-message">
-                {% if error %}
-                    <h3>Error</h3>
-                    <p>{{ error }}</p>
-                {% elif prediction %}
-                    <h3>AQI Prediction Results</h3>
-                    <div >
-                        <h4>Air Quality Index: <strong>{{ prediction.predicted_aqi }}</strong></h4>
-                        <p>Category: {{ prediction.category }}</p>
-                    </div>
-                    <div class="health-advice">
-                        <h4>Health Advisory</h4>
-                        <p>{{ prediction.health_advice }}</p>
-                        <h5>Recommended Activities:</h5>
-                        <p>{{ prediction.activities }}</p>
-                        <h5>Precautions:</h5>
-                        <p>{{ prediction.precautions }}</p>
-                    </div>
-                    <div class="timestamp">
-                        <small>Prediction made at: {{ prediction.timestamp }}</small>
-                    </div>
-                {% endif %}
-            </div>
-            {% endif %} content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced AQI Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
 </head>
 <body>
     <nav>
@@ -36,6 +14,7 @@
             <div class="logo">AQI Predictor</div>
             <ul class="nav-links">
                 <li><a href="{{ url_for('index') }}">Home</a></li>
+                <!-- <li><a href="{{ url_for('info')}}" >Info</a></li> -->
                 <li class="dropdown">
                     <a href="#" class="dropbtn">AQI</a>
                     <div class="dropdown-content">
@@ -43,75 +22,110 @@
                         <a href="{{ url_for('advance') }}">Advanced</a>
                     </div>
                 </li>
+                <li><a href="{{ url_for('info')}}" >Info</a></li>
             </ul>
         </div>
     </nav>
-   <div id="predict-page" class="predict-page">
+
+    <div id="predict-page" class="predict-page">
         <div class="container">
             <form class="predict-form" method="POST">
                 <h2>Air Quality Prediction</h2>
-                <p style="text-align: center; margin-bottom: 2rem; color: #666;">Enter the pollutant values to predict the Air Quality Index</p>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
+                    Enter the pollutant values to predict the Air Quality Index
+                </p>
+
                 {% if error %}
-                    <div class="error-message">{{ error }}</div>
-                {% endif %}
-                <div class="form-group">
-                        <label for="std-id">Station ID</label>
-                        <input type="number" id="std-id" name="std-id" class="station" required>
+                    <div class="error-message">
+                        <strong>Error:</strong> {{ error }}
                     </div>
-                    <br>
+                {% endif %}
+
+                <div class="form-group" style="max-width: 300px; margin: 0 auto 2rem;">
+                    <label for="std-id">Station ID</label>
+                    <input type="number" id="std-id" name="std-id" required 
+                           placeholder="Enter station ID (e.g., 1, 2, 3...)" min="0">
+                </div>
+
                 <div class="form-grid">
-                   
                     <div class="form-group">
-                        
                         <label for="pm25">PM2.5 (μg/m³)</label>
-                        <input type="number" id="pm25" name="pm25" step="0.1" required>
+                        <input type="number" id="pm25" name="pm25" step="any" required 
+                               placeholder="0-500" min="0" title="high precision">
                     </div>
                     <div class="form-group">
                         <label for="pm10">PM10 (μg/m³)</label>
-                        <input type="number" id="pm10" name="pm10" value="10" step="0.1" required>
+                        <input type="number" id="pm10" name="pm10" step="any" required 
+                               placeholder="0-600" min="0">
                     </div>
                     <div class="form-group">
                         <label for="no2">NO2 (μg/m³)</label>
-                        <input type="number" id="no2" name="no2" step="0.1" required>
+                        <input type="number" id="no2" name="no2" step="any" required 
+                               placeholder="0-200" min="0">
                     </div>
                     <div class="form-group">
                         <label for="so2">SO2 (μg/m³)</label>
-                        <input type="number" id="so2" name="so2" step="0.1" required>
+                        <input type="number" id="so2" name="so2" step="any" required 
+                               placeholder="0-100" >
                     </div>
                     <div class="form-group">
                         <label for="co">CO (mg/m³)</label>
-                        <input type="number" id="co" name="co" step="0.1" required>
+                        <input type="number" id="co" name="co" step="any" required 
+                               placeholder="0-10" min="0">
                     </div>
                     <div class="form-group">
                         <label for="o3">O3 (μg/m³)</label>
-                        <input type="number" id="o3" name="o3" step="0.1" required>
+                        <input type="number" id="o3" name="o3" step="any" required 
+                               placeholder="0-300" min="0">
                     </div>
                     <div class="form-group">
-                        
-                        <label for="pm25">Temperature C</label>
-                        <input type="number" id="temp" name="temp" step="0.1" required>
+                        <label for="temp">Temperature (°C)</label>
+                        <input type="number" id="temp" name="temp" step="any" required 
+                               placeholder="-10 to 50">
                     </div>
                     <div class="form-group">
-                        
-                        <label for="pm25">Rain (mm)</label>
-                        <input type="number" id="rain" name="rain" step="0.1" required>
+                        <label for="rain">Rain (mm)</label>
+                        <input type="number" id="rain" name="rain" step="any" required 
+                               placeholder="0-50" min="0">
                     </div>
                 </div>
                 
                 <button type="submit" class="submit-btn">Predict Air Quality Index</button>
             </form>
             
-            {% if error or result %}
-            <div id="result-message" class="result-message">
-                {% if error %}
-                    <h3>Error</h3>
-                    <p>{{ error }}</p>
-                {% else %}
-                    <h3>Prediction Result</h3>
-                    <p>Based on the provided values, the predicted Air Quality Index is <strong>{{ result }}</strong></p>
-                    {% set category, color = get_aqi_category(result) %}
-                    <p >Category: {{ category }}</p>
-                {% endif %}
+            {% if prediction and prediction.success %}
+            <div id="result-section" class="result-section">
+                <!-- <div class="divider">============================================================</div> -->
+                <div class="result-header">AQI PREDICTION RESULTS</div>
+                <!-- <div class="divider">============================================================</div> -->
+                
+                <div class="result-content">
+                    <p>Station: {{ prediction.station_id }}</p>
+                    <p>Timestamp: {{ prediction.timestamp }}</p>
+                    
+                    <p class="prediction-value">PREDICTED AQI: {{ "%.2f"|format(prediction.predicted_aqi) }}</p>
+                    <!-- <p class="category-{{ prediction.category.lower().replace(' ', '-') }}">Category: {{ prediction.category }}</p> -->
+                    
+                    <p class="section-header">Health Advice:</p>
+                    <p class="section-content">{{ prediction.health_advice }}</p>
+                    
+                    <p class="section-header">Activities:</p>
+                    <p class="section-content">{{ prediction.activities }}</p>
+                    <p class="section-content">Precautions: {{ prediction.precautions }}</p>
+                    
+                    <p class="section-header">Input Parameters Used:</p>
+                    <p class="param-item">PM2.5: {{ prediction.input_data.PM2_5 }} µg/m³</p>
+                    <p class="param-item">PM10: {{ prediction.input_data.PM10 }} µg/m³</p>
+                    <p class="param-item">NO2: {{ prediction.input_data.NO2 }} µg/m³</p>
+                    <p class="param-item">SO2: {{ prediction.input_data.SO2 }} µg/m³</p>
+                    <p class="param-item">CO: {{ prediction.input_data.CO }} mg/m³</p>
+                    <p class="param-item">O3: {{ prediction.input_data.O3 }} µg/m³</p>
+                    <p class="param-item">Temperature: {{ prediction.input_data.Temp_C }}°C</p>
+                    <p class="param-item">Rainfall: {{ prediction.input_data.Rain_mm }} mm</p>
+                </div>
+                
+                <!-- <div class="divider">============================================================</div> -->
+            </div>
             </div>
             {% endif %}
         </div>
@@ -119,12 +133,78 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const resultMessage = document.getElementById('result-message');
-            if (resultMessage) {
-                resultMessage.scrollIntoView({ behavior: 'smooth' });
+            const resultSection = document.getElementById('result-section');
+            if (resultSection) {
+                // Smooth scroll to results
+                setTimeout(() => {
+                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+
+                // Add animation to result cards
+                const cards = resultSection.querySelectorAll('.health-card, .aqi-result, .input-summary');
+                cards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.6s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 200 * (index + 1));
+                });
             }
+
+            // Form validation
+            const form = document.querySelector('.predict-form');
+            form.addEventListener('submit', function(e) {
+                const inputs = form.querySelectorAll('input[required]');
+                let isValid = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.style.borderColor = '#ff4757';
+                    } else {
+                        input.style.borderColor = '#e1e5e9';
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Please fill in all required fields.');
+                }
+            });
+
+            // Input validation hints
+            const inputs = {
+                'pm25': { min: 0, max: 500, unit: 'μg/m³' },
+                'pm10': { min: 0, max: 600, unit: 'μg/m³' },
+                'no2': { min: 0, max: 200, unit: 'μg/m³' },
+                'so2': { min: 0, max: 100, unit: 'μg/m³' },
+                'co': { min: 0, max: 10, unit: 'mg/m³' },
+                'o3': { min: 0, max: 300, unit: 'μg/m³' },
+                'temp': { min: -10, max: 50, unit: '°C' },
+                'rain': { min: 0, max: 50, unit: 'mm' }
+            };
+
+            Object.keys(inputs).forEach(inputId => {
+                const input = document.getElementById(inputId);
+                const config = inputs[inputId];
+                
+                input.addEventListener('input', function() {
+                    const value = parseFloat(this.value);
+                    if (value < config.min || value > config.max) {
+                        this.style.borderColor = '#ffa502';
+                        this.title = `Typical range: ${config.min}-${config.max} ${config.unit}`;
+                    } else {
+                        this.style.borderColor = '#2ed573';
+                        this.title = '';
+                    }
+                });
+            });
         });
     </script>
-    
+    <!-- <footer>
+        <p>&copy; 2025 AQI Predictor. All rights reserved.</p>
+    </footer> -->
 </body>
 </html>

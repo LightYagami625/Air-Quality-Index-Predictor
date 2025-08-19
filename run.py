@@ -57,7 +57,7 @@ def get_aqi_category(aqi):
 def get_health_advice(category):
     """Get detailed health advice based on AQI category"""
     advice_map = {
-        "Good 🟢": {
+        "Good ": {
             "advice": "Air quality is good. Perfect for all outdoor activities.",
             "activities": "Jogging, cycling, outdoor sports recommended",
             "precautions": "No precautions needed"
@@ -340,7 +340,7 @@ def main():
         print("2. 🎭 Use preset scenarios")
         print("3. 📁 Batch prediction from CSV")
         print("4. ℹ️  Show model information")
-        print("5. 👋 Exit")
+        # print("5. 👋 Exit")
         
         choice = input("\nEnter your choice (1-5): ").strip()
         

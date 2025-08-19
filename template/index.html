@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Air Quality Index Predictor</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
         .dropdown {
@@ -44,14 +44,16 @@
             <div class="logo">AQI Predictor</div>
             <ul class="nav-links">
                 <li><a href="{{ url_for('index') }}" onclick="showHome()">Home</a></li>
+                <!-- <li><a href="{{ url_for('info')}}" >Info</a></li> -->
                 <li class="dropdown">
                     <!-- <input type="text"> -->
-                    <a href="#" class="dropbtn">Predict</a>
+                    <a href="#" class="dropbtn">AQI</a>
                     <div class="dropdown-content">
                         <a href="{{ url_for('basic') }}">Basic</a>
                         <a href="{{ url_for('advance') }}">Advance</a>
                     </div>
                 </li>
+                <li><a href="{{ url_for('info')}}" >Info</a></li>
             </ul>
         </div>
     </nav>
@@ -183,6 +185,9 @@
             document.getElementById('result-message').scrollIntoView({ behavior: 'smooth' });
         }
     </script> -->
+    <!-- <footer>
+        <p>&copy; 2025 AQI Predictor. All rights reserved.</p>
+    </footer> -->
 </body>
 
 </html>
