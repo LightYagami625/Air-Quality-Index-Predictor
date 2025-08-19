@@ -101,4 +101,4 @@ def basic():
 def info():
     return render_template("info.html")
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8000)
+    app.run(debug=True, host="0.0.0.0", port=8080)

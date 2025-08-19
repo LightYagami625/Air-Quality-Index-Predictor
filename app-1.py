@@ -79,5 +79,9 @@ def advance():
 def basic():
     return render_template("basic.html")
 
+@app.route("/info")
+def info():
+    return render_template("info.html")
+
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8800)
+    app.run(debug=True, host="0.0.0.0", port=8880)
