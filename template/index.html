@@ -75,47 +75,62 @@
         <section class="dashboard">
             <div class="container">
                 <h2>Current Air Quality Dashboard</h2>
-                
-                <div class="metrics-grid">
-                    <!-- PM2.5 Card -->
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-title">PM2.5</span>
-                            <span class="metric-value">45 μg/m³</span>
+                <div class="metrics-container">
+                    <div class="metrics-grid">
+                        <!-- PM2.5 Card -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">PM2.5</span>
+                                <span class="metric-value">45 μg/m³</span>
+                            </div>
+                            <div class="metric-chart1 PM2.5-chart">
+                                <div class="chart-bar"></div>
+                            </div>
+                            <div class="metric-info">
+                                As PM2.5 concentration increases, AQI rises sharply, making it the most critical pollutant for air quality and health.                          
+                            </div>
                         </div>
-                        <div class="metric-chart pm25-chart">
-                            <div class="chart-bar"></div>
-                        </div>
-                        <div class="metric-info">
-                            Fine particulate matter with diameter less than 2.5 micrometers. Current level indicates moderate air quality.
-                        </div>
-                    </div>
 
-                    <!-- Temperature Card -->
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-title">Temperature</span>
-                            <span class="metric-value">24°C</span>
+                        <!-- Temperature Card -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Temperature</span>
+                                <span class="metric-value">24°C</span>
+                            </div>
+                            <div class="metric-chart2 temp-chart">
+                                <div class="chart-bar"></div>
+                            </div>
+                            <div class="metric-info">
+                                Both hot summers and cold winters can worsen AQI — by boosting ozone in heat or trapping pollutants in winter.
+                            </div>
                         </div>
-                        <div class="metric-chart temp-chart">
-                            <div class="chart-bar"></div>
+                        <br>
+                        <!-- NO2 Card -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">NO2</span>
+                                <span class="metric-value">68%</span>
+                            </div>
+                            <div class="metric-chart3 NO2-chart">
+                                <div class="chart-bar"></div>
+                            </div>
+                            <div class="metric-info">
+                               Higher NO₂ levels, mostly from vehicles and industry, increase AQI and contribute to urban smog
+                            </div>
                         </div>
-                        <div class="metric-info">
-                            Current ambient temperature. Temperature affects the formation and dispersion of air pollutants.
-                        </div>
-                    </div>
 
-                    <!-- Humidity Card -->
-                    <div class="metric-card">
-                        <div class="metric-header">
-                            <span class="metric-title">Humidity</span>
-                            <span class="metric-value">68%</span>
-                        </div>
-                        <div class="metric-chart humidity-chart">
-                            <div class="chart-bar"></div>
-                        </div>
-                        <div class="metric-info">
-                            Relative humidity affects air quality by influencing the formation of secondary pollutants.
+                        <!-- SO2 Card -->
+                        <div class="metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">SO2</span>
+                                <span class="metric-value">56%</span>
+                            </div>
+                            <div class="metric-chart4 SO2-chart">
+                                <div class="chart-bar"></div>
+                            </div>
+                            <div class="metric-info">
+                                SO₂ from fossil fuel burning raises AQI, especially in industrial zones and coal-burning regions.
+                            </div>
                         </div>
                     </div>
                 </div>
